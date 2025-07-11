@@ -1,0 +1,177 @@
+:root {
+    --bg-color: #000000; /* Siyah arka plan */
+    --text-color: #00FF00; /* Yeşil metin */
+    --input-bg: #1A1A1A; /* Hafif gri, koyu input arka planı */
+    --accent-color: #00AA00; /* Vurgu rengi (butonlar vb.) */
+    --sidebar-bg: #0A0A0A; /* Sidebar için daha koyu siyah */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden; /* Kenarlarda scroll olmasını engeller */
+}
+
+/* --- Genel Arayüz ve Layout --- */
+
+.auth-container, .chat-container {
+    border: 1px solid var(--accent-color);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+}
+
+/* --- Giriş Ekranı --- */
+
+.auth-container {
+    width: 350px;
+    padding: 30px;
+    background-color: var(--sidebar-bg);
+}
+
+.auth-box h2 {
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+input[type="text"], 
+input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid var(--accent-color);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button[type="submit"]:hover {
+    background-color: #00EE00;
+}
+
+/* --- Mesajlaşma Arayüzü (Chat) --- */
+
+.chat-container {
+    display: flex;
+    width: 80%;
+    max-width: 1200px;
+    height: 90vh;
+    background-color: var(--bg-color);
+}
+
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-bg);
+    padding: 20px 0;
+    border-right: 1px solid var(--accent-color);
+}
+
+.user-list h3 {
+    padding: 0 20px;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.user-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-list li {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.user-list li:hover, .active-user {
+    background-color: var(--input-bg);
+}
+
+.chat-area {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    background-color: var(--sidebar-bg);
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.messages {
+    flex-grow: 1;
+    padding: 20px;
+    overflow-y: auto;
+    /* Mesaj kaydırma alanı */
+}
+
+/* Mesaj Stilleri */
+.message {
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+.incoming {
+    background-color: #1A1A1A;
+    align-self: flex-start;
+}
+
+.outgoing {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    text-align: right;
+    align-self: flex-end;
+}
+
+/* Mesaj Gönderme Alanı */
+.message-input-area {
+    padding: 20px;
+    border-top: 1px solid var(--accent-color);
+    display: flex;
+    background-color: var(--sidebar-bg);
+}
+
+#messageInput {
+    flex-grow: 1;
+    padding: 15px;
+    border: 1px solid var(--accent-color);
+    background-color: var(--input-bg);
+    color: var(--text-color);
+    border-radius: 5px;
+}
+
+#sendButton {
+    padding: 15px 30px;
+    margin-left: 10px;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#sendButton:hover {
+    background-color: #00EE00;
+}
