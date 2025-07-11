@@ -92,10 +92,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const userMappings = [
                 { uid: '0EdlNSUl34c7duJ7alK4EqSDkWN2', email: 'admin@example.com', name: 'Admin' },
-                { uid: 'jDdniNAtuoSdNq4mht96pcvMFph1', email: 'mert@example.com', name: 'Mert' },
-                { uid: 'BzsJeb4L1OTb850fibgs5ZgE1tg2', email: 'zeynep@example.com', name: 'Zeynep' },
-                { uid: '82UKk2pogpNbD8laDSUDVobVm5q2', email: 'baran@example.com', name: 'Baran' },
-                { uid: '0iZuX6rG6vXMDE6liIgpnblooLW2', email: 'melike@example.com', name: 'Melike' }
+                { uid: 'nNhtAK4JUPYUYuJIyCBpWwZRMKF2', email: 'mert@may.com', name: 'Mert' },
+                { uid: 'g806NcWR4Oe6ha3RKXPEXSvczmA2', email: 'zeynep@may.com', name: 'Zeynep' },
+                { uid: 'dzIGu8GMr1VOETqLf5Lp1vC6dSw2', email: 'baran@may.com', name: 'Baran' },
+                { uid: 'Ex7mtNTGEUR9AXDpGE59kWaKGpP2', email: 'melike@may.com', name: 'Melike' }
             ];
 
             userMappings.forEach(u => {
@@ -258,12 +258,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const getDisplayNameFromAllUsers = (uid) => {
                     const user = allUsers.find(u => u.id === uid);
                     const adminUserMapping = [
-                        { uid: 'YOUR_ADMIN_UID', email: 'admin@example.com', name: 'Admin' },
-                        { uid: 'YOUR_MERT_UID', email: 'mert@example.com', name: 'Mert' },
-                        { uid: 'YOUR_ZEYNEP_UID', email: 'zeynep@example.com', name: 'Zeynep' },
-                        { uid: 'YOUR_BARAN_UID', email: 'baran@example.com', name: 'Baran' },
-                        { uid: 'YOUR_MELIKE_UID', email: 'melike@example.com', name: 'Melike' }
-                    ];
+                        { uid: '0EdlNSUl34c7duJ7alK4EqSDkWN2', email: 'admin@example.com', name: 'Admin' },
+                        { uid: 'nNhtAK4JUPYUYuJIyCBpWwZRMKF2', email: 'mert@may.com', name: 'Mert' },
+                        { uid: 'g806NcWR4Oe6ha3RKXPEXSvczmA2', email: 'zeynep@may.com', name: 'Zeynep' },
+                        { uid: 'dzIGu8GMr1VOETqLf5Lp1vC6dSw2', email: 'baran@may.com', name: 'Baran' },
+                        { uid: 'Ex7mtNTGEUR9AXDpGE59kWaKGpP2', email: 'melike@may.com', name: 'Melike' }
+            ];
                     const adminUser = adminUserMapping.find(u => u.uid === uid);
                     if (adminUser) return adminUser.name;
                     return user ? user.name : uid.substring(0, 6) + '...'; 
