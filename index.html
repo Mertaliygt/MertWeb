@@ -12,44 +12,59 @@
         <div class="auth-box">
             <h2>Giriş Yap</h2>
             <form id="loginForm">
-                <input type="text" id="username" placeholder="Kullanıcı Adı" required>
+                <input type="email" id="email" placeholder="E-posta" required>
                 <input type="password" id="password" placeholder="Şifre" required>
                 <button type="submit">Giriş</button>
             </form>
         </div>
     </div>
 
-    <div class="chat-container" style="display: none;">
+    <div class="app-container" style="display: none;">
         
-        <div class="sidebar">
-            <div class="user-list">
-                <h3>Kullanıcılar</h3>
-                <ul id="userList">
-                    <li data-id="user1">Test Kullanıcı 1</li>
-                    <li data-id="user2">Test Kullanıcı 2</li>
-                    <li data-id="user3">Test Kullanıcı 3</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="chat-area">
+        <nav class="top-nav">
+            <span id="loggedInUserName"></span>
+            <button id="logoutButton">Çıkış Yap</button>
+            <button id="adminPanelButton" style="display: none;">Admin Paneli</button>
+        </nav>
+
+        <div class="chat-container">
             
-            <header class="chat-header">
-                <h2 id="chatRecipientName">Sohbet (Kişi Seçin)</h2>
-            </header>
-            
-            <div class="messages" id="messagesDisplay">
+            <div class="sidebar">
+                <div class="user-list">
+                    <h3>Kullanıcılar</h3>
+                    <ul id="userList">
+                        </ul>
                 </div>
+            </div>
             
-            <div class="message-input-area">
-                <input type="text" id="messageInput" placeholder="Mesaj yazın...">
-                <button id="sendButton">Gönder</button>
+            <div class="chat-area">
+                
+                <header class="chat-header">
+                    <h2 id="chatRecipientName">Sohbet (Kişi Seçin)</h2>
+                </header>
+                
+                <div class="messages" id="messagesDisplay">
+                    </div>
+                
+                <div class="message-input-area">
+                    <input type="text" id="messageInput" placeholder="Mesaj yazın...">
+                    <button id="sendButton">Gönder</button>
+                </div>
             </div>
         </div>
+
+        <div class="admin-panel" style="display: none;">
+            <h2>Admin Paneli - Tüm Mesajlar</h2>
+            <button id="backToChatButton">Sohbete Geri Dön</button>
+            <div id="allMessagesDisplay" class="admin-messages-display">
+                </div>
+        </div>
+
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script> 
     
     <script src="script.js"></script>
 

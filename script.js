@@ -20,21 +20,12 @@ const auth = firebase.auth();
 let currentUser = null; // Giriş yapan kullanıcının Firebase User objesi
 let currentRecipientId = null; // Mesaj gönderilecek alıcı ID'si (UID)
 let unsubscribeMessages = null; // Firestore dinleyicisini durdurmak için
-
-// Kullanıcı UID'lerini isimlerle eşleştiren geçici bir harita
-// Gerçek uygulamada bu bilgiyi Firestore'daki bir 'users' koleksiyonundan çekerdik.
-const userNames = {
-    // Bu UID'leri Firebase Authentication'dan alıp buraya yazmanız gerekecek!
-    // Örnek: 'adminUID': 'Admin', 'mertUID': 'Mert', ...
-    // Şimdilik e-posta adreslerinin "@" öncesi kısmını kullanacağız,
-    // ancak gerçekte Firebase UID'leri kullanılmalıdır.
-    // Bu kısım, kullanıcıları Firebase Auth'tan çektikten sonra güncellenecek.
-};
+let allUsers = []; // Tüm uygulama kullanıcılarını tutacak array (Firebase Auth'tan çekilecek)
 
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const authContainer = document.querySelector('.auth-container');
-    const appContainer = document.querySelector('.app-container'); // Yeni ana uygulama divi
+    const appContainer = document.querySelector('.app-container');
     const messageInput = document.getElementById('messageInput');
     const sendButton = document.getElementById('sendButton');
     const messagesDisplay = document.getElementById('messagesDisplay');
@@ -44,31 +35,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutButton = document.getElementById('logoutButton');
     const adminPanelButton = document.getElementById('adminPanelButton');
     const adminPanel = document.querySelector('.admin-panel');
-    const chatContainer = document.querySelector('.chat-container'); // Sohbet alanının kendisi
+    const chatContainer = document.querySelector('.chat-container');
     const backToChatButton = document.getElementById('backToChatButton');
     const allMessagesDisplay = document.getElementById('allMessagesDisplay');
 
     // --- Firebase Authentication Durum Değişikliği Dinleyicisi ---
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged(async user => {
         if (user) {
-            // Kullanıcı giriş yapmış
-            currentUser = user; // Firebase User objesini ata
-            loggedInUserName.textContent = `Hoşgeldin, ${user.email.split('@')[0]}!`; // E-postadan kullanıcı adını al
+            currentUser = user;
+            loggedInUserName.textContent = `Hoşgeldin, ${user.email.split('@')[0]}!`;
             authContainer.style.display = 'none';
-            appContainer.style.display = 'flex'; // Ana uygulama divini göster
+            appContainer.style.display = 'flex';
 
-            // Admin kontrolü
             if (user.email === 'admin@example.com') { // Admin e-postası ile kontrol
                 adminPanelButton.style.display = 'block';
             } else {
                 adminPanelButton.style.display = 'none';
             }
 
-            loadUsers(); // Kullanıcı listesini yükle
+            await loadUsers(); // Kullanıcı listesini yükle
             console.log('Kullanıcı giriş yaptı:', currentUser.uid);
 
         } else {
-            // Kullanıcı çıkış yapmış veya giriş yapmamış
             currentUser = null;
             authContainer.style.display = 'flex';
             appContainer.style.display = 'none';
@@ -86,7 +74,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             await auth.signInWithEmailAndPassword(email, password);
-            // onAuthStateChanged dinleyicisi otomatik olarak UI'ı güncelleyecek
             console.log('Giriş başarılı!');
         } catch (error) {
             console.error("Giriş hatası: ", error.message);
@@ -98,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
     logoutButton.addEventListener('click', async () => {
         try {
             await auth.signOut();
-            // onAuthStateChanged dinleyicisi otomatik olarak UI'ı güncelleyecek
             console.log('Çıkış başarılı!');
         } catch (error) {
             console.error("Çıkış hatası: ", error.message);
@@ -106,59 +92,61 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Kullanıcı Listesini Yükleme (Şimdilik Sabit Kullanıcılar) ---
-    // NOT: Gerçek uygulamada bu kullanıcıları Firebase Firestore'daki bir 'users' koleksiyonundan çekerdiniz.
-    // Şimdilik sadece e-posta adreslerinin "@" öncesi kısmını ID ve isim olarak kullanacağız.
-    // Ancak Firebase Authentication'dan gelen 'user.uid' gerçek ID'dir.
+    // --- Kullanıcı Listesini Yükleme (Firebase Authentication'dan çekiliyor gibi davranıyoruz) ---
     async function loadUsers() {
-        userListElement.innerHTML = ''; // Mevcut listeyi temizle
+        userListElement.innerHTML = '';
+        allUsers = []; // Array'i temizle
 
-        // Örnek kullanıcılar (Firebase Authentication'da oluşturduğunuz e-postalarla eşleşmeli)
-        const predefinedUsers = [
-            { email: 'admin@example.com', name: 'Admin' },
-            { email: 'mert@example.com', name: 'Mert' },
-            { email: 'zeynep@example.com', name: 'Zeynep' },
-            { email: 'baran@example.com', name: 'Baran' },
-            { email: 'melike@example.com', name: 'Melike' }
-        ];
+        try {
+            // ÖNEMLİ: Aşağıdaki 'userMappings' objesini KENDİ Firebase Authentication panelinizden
+            // oluşturduğunuz kullanıcıların GERÇEK UID'leri ile doldurmanız GEREKİYOR.
+            // Her bir kullanıcının UID'sini Authentication panelinden kopyalayın!
+            const userMappings = [
+                { uid: 'YOUR_ADMIN_UID', email: 'admin@example.com', name: 'Admin' },
+                { uid: 'YOUR_MERT_UID', email: 'mert@example.com', name: 'Mert' },
+                { uid: 'YOUR_ZEYNEP_UID', email: 'zeynep@example.com', name: 'Zeynep' },
+                { uid: 'YOUR_BARAN_UID', email: 'baran@example.com', name: 'Baran' },
+                { uid: 'YOUR_MELIKE_UID', email: 'melike@example.com', name: 'Melike' }
+            ];
 
-        // Firebase Auth'tan tüm kullanıcıları doğrudan çekmek istemci tarafında güvenlik açığı oluşturabilir.
-        // Bu yüzden, şimdilik bu predefinedUsers listesini kullanacağız
-        // ve Firestore'a kaydederken currentUser.uid kullanacağız.
-        // Kullanıcı listesinde görüntülerken user.email.split('@')[0] kullanacağız.
+            // Oluşturduğunuz kullanıcıları 'allUsers' array'ine ekle
+            userMappings.forEach(u => {
+                // Sadece giriş yapan kullanıcı kendisi değilse listeye ekle
+                if (currentUser && u.uid !== currentUser.uid) { 
+                    allUsers.push({ id: u.uid, name: u.name, email: u.email });
+                }
+            });
 
-        predefinedUsers.forEach(user => {
-            if (user.email !== currentUser.email) { // Kendini listeleme
+            // Kullanıcı listesini UI'a ekle
+            allUsers.forEach(user => {
                 const li = document.createElement('li');
                 li.textContent = user.name;
-                // Kullanıcı ID'si olarak e-postanın "@" öncesi kısmını kullanıyoruz.
-                // Gerçekte, Firebase UID'sini kullanmalıyız.
-                li.dataset.id = user.email.split('@')[0]; // Örneğin 'mert'
-                li.addEventListener('click', () => selectRecipient(user.email.split('@')[0], user.name));
+                li.dataset.id = user.id; // data-id olarak kullanıcının UID'sini sakla
+                li.addEventListener('click', () => selectRecipient(user.id, user.name));
                 userListElement.appendChild(li);
-            }
-        });
+            });
+
+        } catch (error) {
+            console.error("Kullanıcılar yüklenirken hata oluştu: ", error);
+        }
     }
 
     // --- Alıcı Seçme İşlemi ---
-    function selectRecipient(recipientId, recipientName) {
-        currentRecipientId = recipientId;
+    function selectRecipient(recipientUid, recipientName) {
+        currentRecipientId = recipientUid; // currentRecipientId artık UID
         chatRecipientName.textContent = `Sohbet (${recipientName})`;
-        messagesDisplay.innerHTML = ''; // Yeni sohbet için mesajları temizle
+        messagesDisplay.innerHTML = '';
         
-        // Önceki dinleyiciyi durdur (varsa)
         if (unsubscribeMessages) {
             unsubscribeMessages();
         }
 
-        // Seçilen alıcı ile mesajları dinlemeye başla
         listenForMessages();
 
-        // Kullanıcı listesindeki aktif sınıfı güncelle
         Array.from(userListElement.children).forEach(li => {
             li.classList.remove('active-user');
         });
-        const selectedLi = userListElement.querySelector(`li[data-id="${recipientId}"]`);
+        const selectedLi = userListElement.querySelector(`li[data-id="${recipientUid}"]`);
         if (selectedLi) {
             selectedLi.classList.add('active-user');
         }
@@ -171,22 +159,20 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Sohbet ID'sini oluştur (her zaman küçük ID önce gelecek şekilde)
-        // Burada currentUser.uid ve currentRecipientId kullanıyoruz.
         const chatRoomId = [currentUser.uid, currentRecipientId].sort().join('_');
         console.log(`Sohbet odası dinleniyor: ${chatRoomId}`);
 
         unsubscribeMessages = db.collection('chats')
             .doc(chatRoomId)
             .collection('messages')
-            .orderBy('timestamp') // Zaman damgasına göre sırala
+            .orderBy('timestamp')
             .onSnapshot((snapshot) => {
-                messagesDisplay.innerHTML = ''; // Mesajları tekrar yüklemeden önce temizle
+                messagesDisplay.innerHTML = '';
                 snapshot.forEach((doc) => {
                     const message = doc.data();
                     displayMessage(message);
                 });
-                messagesDisplay.scrollTop = messagesDisplay.scrollHeight; // En alta kaydır
+                messagesDisplay.scrollTop = messagesDisplay.scrollHeight;
             }, (error) => {
                 console.error("Mesajlar dinlenirken hata oluştu: ", error);
             });
@@ -197,17 +183,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const messageText = messageInput.value.trim();
 
         if (messageText && currentUser && currentRecipientId) {
-            // Sohbet ID'sini oluştur
             const chatRoomId = [currentUser.uid, currentRecipientId].sort().join('_');
 
             try {
                 await db.collection('chats').doc(chatRoomId).collection('messages').add({
-                    senderId: currentUser.uid, // Gönderenin UID'si
-                    recipientId: currentRecipientId, // Alıcının UID'si
+                    senderId: currentUser.uid,
+                    recipientId: currentRecipientId,
                     text: messageText,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp() // Sunucu zaman damgası
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 });
-                messageInput.value = ''; // Mesaj kutusunu temizle
+                messageInput.value = '';
             } catch (error) {
                 console.error("Mesaj gönderilirken hata oluştu: ", error);
                 alert("Mesaj gönderilemedi. Lütfen tekrar deneyin.");
@@ -229,23 +214,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message');
 
-        // Mesajın kimden geldiğine göre stil belirle
-        if (message.senderId === currentUser.uid) { // UID'ye göre kontrol
+        if (message.senderId === currentUser.uid) {
             messageDiv.classList.add('outgoing');
         } else {
             messageDiv.classList.add('incoming');
         }
         
-        // Mesajı gönderen ve alanın isimlerini göstermek için (geçici)
-        // Gerçekte, bu UID'leri isimlere çevirmek için bir 'users' koleksiyonu kullanırdık.
-        const senderName = message.senderId === currentUser.uid ? 'Sen' : (userNames[message.senderId] || message.senderId);
-        const recipientName = message.recipientId === currentUser.uid ? 'Sen' : (userNames[message.recipientId] || message.recipientId);
+        // UID'yi isme çevir (allUsers listesinden)
+        const getDisplayName = (uid) => {
+            if (uid === currentUser.uid) return 'Sen';
+            const user = allUsers.find(u => u.id === uid);
+            return user ? user.name : uid.substring(0, 6) + '...'; // Bulamazsa UID'nin başını göster
+        };
 
-        // Tarih ve saat formatı
+        const senderName = getDisplayName(message.senderId);
+        // recipientName burada mesaj görüntüleme için gerekli değil, ancak debug için tutulabilir
+        // const recipientName = getDisplayName(message.recipientId); 
+
         let timeString = '';
         if (message.timestamp && message.timestamp.toDate) {
             const date = message.timestamp.toDate();
-            timeString = ` (${date.toLocaleDateString()} ${date.toLocaleTimeString()})`;
+            timeString = ` (${date.toLocaleDateString('tr-TR')} ${date.toLocaleTimeString('tr-TR')})`;
         }
 
         messageDiv.innerHTML = `<p><strong>${senderName}:</strong> ${message.text}${timeString}</p>`;
@@ -254,33 +243,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Admin Paneli Fonksiyonları ---
     adminPanelButton.addEventListener('click', () => {
-        chatContainer.style.display = 'none'; // Sohbet alanını gizle
-        adminPanel.style.display = 'flex'; // Admin panelini göster
-        loadAllMessagesForAdmin(); // Tüm mesajları yükle
+        chatContainer.style.display = 'none';
+        adminPanel.style.display = 'flex';
+        loadAllMessagesForAdmin();
     });
 
     backToChatButton.addEventListener('click', () => {
-        adminPanel.style.display = 'none'; // Admin panelini gizle
-        chatContainer.style.display = 'flex'; // Sohbet alanını göster
-        // Eğer bir alıcı seçiliyse mesajları tekrar dinlemeye başla
-        if (currentRecipientId) {
+        adminPanel.style.display = 'none';
+        chatContainer.style.display = 'flex';
+        if (currentRecipientId) { // Admin panelinden çıkınca seçili alıcı varsa dinlemeyi tekrar başlat
             listenForMessages();
         }
     });
 
     // --- Admin İçin Tüm Mesajları Yükleme ---
     async function loadAllMessagesForAdmin() {
-        allMessagesDisplay.innerHTML = ''; // Önceki mesajları temizle
+        allMessagesDisplay.innerHTML = '';
         const allMessages = [];
 
         try {
-            // Tüm sohbet odalarını al
             const chatsSnapshot = await db.collection('chats').get();
 
             for (const chatDoc of chatsSnapshot.docs) {
-                const chatRoomId = chatDoc.id;
-                // Her sohbet odasındaki mesajları al
-                const messagesSnapshot = await db.collection('chats').doc(chatRoomId).collection('messages').orderBy('timestamp').get();
+                const messagesSnapshot = await db.collection('chats').doc(chatDoc.id).collection('messages').orderBy('timestamp').get();
                 
                 messagesSnapshot.forEach(msgDoc => {
                     allMessages.push(msgDoc.data());
@@ -288,23 +273,38 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Mesajları zamana göre sırala (tüm sohbet odalarından gelenler)
-            allMessages.sort((a, b) => a.timestamp - b.timestamp);
+            allMessages.sort((a, b) => {
+                // Firebase Timestamp objelerini karşılaştırmak için toMillis() kullanın
+                const timestampA = a.timestamp && a.timestamp.toMillis ? a.timestamp.toMillis() : 0;
+                const timestampB = b.timestamp && b.timestamp.toMillis ? b.timestamp.toMillis() : 0;
+                return timestampA - timestampB;
+            });
 
-            // Admin konsol formatında göster
+
             allMessages.forEach(message => {
-                // UID'leri isimlere çevirmek için geçici bir harita kullanıyoruz.
-                // Gerçekte Firebase Auth'tan veya 'users' koleksiyonundan çekerdik.
-                const senderName = message.senderId.split('@')[0] || message.senderId; // UID'den isim tahmini
-                const recipientName = message.recipientId.split('@')[0] || message.recipientId; // UID'den isim tahmini
+                // UID'yi isme çevir (allUsers listesinden veya direkt e-posta split ile)
+                const getDisplayNameFromAllUsers = (uid) => {
+                    const user = allUsers.find(u => u.id === uid);
+                    // Eğer allUsers listesinde bulamazsa (ki admin olarak tüm kullanıcıları görmeliyiz),
+                    // varsayılan olarak UID'nin ilk 6 karakterini göster.
+                    // Admin paneli olduğu için adminin kendi UID'sini de isim olarak göstermeliyiz.
+                    const adminUser = userMappings.find(u => u.uid === uid && u.email === 'admin@example.com');
+                    if (adminUser) return adminUser.name;
+                    return user ? user.name : uid.substring(0, 6) + '...'; 
+                };
+
+                const senderName = getDisplayNameFromAllUsers(message.senderId);
+                const recipientName = getDisplayNameFromAllUsers(message.recipientId);
 
                 let timeString = '';
                 if (message.timestamp && message.timestamp.toDate) {
                     const date = message.timestamp.toDate();
-                    timeString = ` (${date.toLocaleDateString()} ${date.toLocaleTimeString()})`;
+                    timeString = ` (${date.toLocaleDateString('tr-TR')} ${date.toLocaleTimeString('tr-TR')})`;
                 }
 
                 const logEntry = document.createElement('div');
-                logEntry.classList.add('admin-log-entry'); // CSS için yeni sınıf
+                logEntry.classList.add('admin-log-entry');
+                // İstediğiniz format: "ID=mert ID=zeynep mesaj > ne yapıyorsun (tarih saat)"
                 logEntry.textContent = `ID=${senderName} ID=${recipientName} mesaj > ${message.text}${timeString}`;
                 allMessagesDisplay.appendChild(logEntry);
             });
