@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             appContainer.style.display = 'flex'; // Ana uygulama divini göster
 
             // Admin kontrolü
-            if (user.email === 'admin') { // Admin e-postası ile kontrol
+            if (user.email === 'admin@example.com') { // Admin e-postası ile kontrol
                 adminPanelButton.style.display = 'block';
             } else {
                 adminPanelButton.style.display = 'none';
@@ -115,11 +115,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Örnek kullanıcılar (Firebase Authentication'da oluşturduğunuz e-postalarla eşleşmeli)
         const predefinedUsers = [
-            { email: 'admin', name: 'admin' },
-            { email: 'mert', name: 'mert34' },
-            { email: 'zeynep', name: 'zeynep34' },
-            { email: 'baran', name: 'baran59' },
-            { email: 'melike', name: 'melike59' }
+            { email: 'admin@example.com', name: 'Admin' },
+            { email: 'mert@example.com', name: 'Mert' },
+            { email: 'zeynep@example.com', name: 'Zeynep' },
+            { email: 'baran@example.com', name: 'Baran' },
+            { email: 'melike@example.com', name: 'Melike' }
         ];
 
         // Firebase Auth'tan tüm kullanıcıları doğrudan çekmek istemci tarafında güvenlik açığı oluşturabilir.
