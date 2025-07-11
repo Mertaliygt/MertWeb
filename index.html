@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Özel Mesajlaşma Platformu</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -57,10 +57,12 @@
             </div>
         </div>
 
-        <div class="admin-panel" style="display: none;">
+        <!-- Admin Paneli - BURADAKİ DEĞİŞİKLİKLER -->
+        <div id="adminPanel" class="admin-panel" style="display: none;">
             <h2>Admin Paneli - Tüm Mesajlar</h2>
+            <button id="refreshLogsButton">Logları Yenile</button> <!-- ID EKLENDİ -->
             <button id="backToChatButton">Sohbete Geri Dön</button>
-            <div id="allMessagesDisplay" class="admin-messages-display">
+            <div id="adminLogsDisplay" class="admin-messages-display"> <!-- ID EKLENDİ -->
                 
             </div>
         </div>

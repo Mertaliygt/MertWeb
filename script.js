@@ -18,6 +18,9 @@ let currentRecipientId = null;
 let unsubscribeMessages = null;
 let allUsers = [];
 
+// Admin UID'nizi buraya tanımlayın. Firebase Authentication bölümünden alın.
+const ADMIN_UID = '0EdlNSUl34c7duJ7alK4EqSDkWN2'; // BURAYI KENDİ ADMİN UID'NİZLE DEĞİŞTİRİN!
+
 document.addEventListener('DOMContentLoaded', () => {
     const loginForm = document.getElementById('loginForm');
     const authContainer = document.querySelector('.auth-container');
@@ -27,13 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const messagesDisplay = document.getElementById('messagesDisplay');
     const userListElement = document.getElementById('userList');
     const chatRecipientName = document.getElementById('chatRecipientName');
-    const loggedInUserName = document.getElementById('loggedInUserName');
+    const loggedInUserName = document.getElementById('loggedInUserName'); // Bu ID'yi HTML'de kontrol edin
     const logoutButton = document.getElementById('logoutButton');
-    const adminPanelButton = document.getElementById('adminPanelButton');
-    const adminPanel = document.querySelector('.admin-panel');
+
+    // Admin Paneli ile ilgili DOM elementleri
+    const adminPanelButton = document.getElementById('adminPanelButton'); // HTML'deki ID ile eşleşmeli
+    const adminPanel = document.querySelector('.admin-panel'); // class yerine ID olursa daha iyi: document.getElementById('adminPanel')
     const chatContainer = document.querySelector('.chat-container');
-    const backToChatButton = document.getElementById('backToChatButton');
-    const allMessagesDisplay = document.getElementById('allMessagesDisplay');
+    const backToChatButton = document.getElementById('backToChatButton'); // HTML'deki ID ile eşleşmeli
+    const refreshLogsButton = document.getElementById('refreshLogsButton'); // HTML'deki ID ile eşleşmeli
+    const adminLogsDisplay = document.getElementById('adminLogsDisplay'); // HTML'deki ID ile eşleşmeli
+
 
     auth.onAuthStateChanged(async user => {
         if (user) {
@@ -42,10 +49,17 @@ document.addEventListener('DOMContentLoaded', () => {
             authContainer.style.display = 'none';
             appContainer.style.display = 'flex';
 
-            if (user.email === 'admin@example.com') {
-                adminPanelButton.style.display = 'block';
+            // Admin kontrolü UID ile
+            if (user.uid === ADMIN_UID) {
+                adminPanelButton.style.display = 'block'; // Butonu görünür yap
+                // Admin giriş yaptığında, varsayılan olarak sohbet ekranını göster, admin panelini gizle
+                // Eğer doğrudan admin paneline gitmesini isterseniz burayı değiştirebilirsiniz.
+                chatContainer.style.display = 'flex';
+                adminPanel.style.display = 'none';
             } else {
-                adminPanelButton.style.display = 'none';
+                adminPanelButton.style.display = 'none'; // Admin değilse gizle
+                chatContainer.style.display = 'flex'; // Sohbeti göster
+                adminPanel.style.display = 'none'; // Admin panelini gizle
             }
 
             await loadUsers();
@@ -55,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
             currentUser = null;
             authContainer.style.display = 'flex';
             appContainer.style.display = 'none';
-            adminPanelButton.style.display = 'none';
+            adminPanelButton.style.display = 'none'; // Çıkış yapıldığında admin butonunu gizle
+            adminPanel.style.display = 'none'; // Çıkış yapıldığında admin panelini gizle
             console.log('Kullanıcı çıkış yaptı veya giriş yapmadı.');
         }
     });
@@ -219,22 +234,35 @@ document.addEventListener('DOMContentLoaded', () => {
         messagesDisplay.appendChild(messageDiv);
     }
 
-    adminPanelButton.addEventListener('click', () => {
-        chatContainer.style.display = 'none';
-        adminPanel.style.display = 'flex';
-        loadAllMessagesForAdmin();
-    });
+    // Admin paneli butonu işlevselliği
+    if (adminPanelButton) { // Butonun varlığını kontrol et
+        adminPanelButton.addEventListener('click', () => {
+            chatContainer.style.display = 'none'; // Sohbet alanını gizle
+            adminPanel.style.display = 'flex';   // Admin panelini göster
+            loadAllMessagesForAdmin(); // Admin paneli açıldığında mesajları yükle
+        });
+    }
 
-    backToChatButton.addEventListener('click', () => {
-        adminPanel.style.display = 'none';
-        chatContainer.style.display = 'flex';
-        if (currentRecipientId) {
-            listenForMessages();
-        }
-    });
+    // Admin panelinden sohbet ekranına geri dönme butonu
+    if (backToChatButton) { // Butonun varlığını kontrol et
+        backToChatButton.addEventListener('click', () => {
+            adminPanel.style.display = 'none';   // Admin panelini gizle
+            chatContainer.style.display = 'flex'; // Sohbet alanını göster
+            if (currentRecipientId) {
+                listenForMessages(); // Eğer bir alıcı seçiliyse mesaj dinlemeye devam et
+            }
+        });
+    }
+
+    // "Logları Yenile" butonu işlevselliği
+    if (refreshLogsButton) {
+        refreshLogsButton.addEventListener('click', () => {
+            loadAllMessagesForAdmin(); // Mesajları yeniden yükle
+        });
+    }
 
     async function loadAllMessagesForAdmin() {
-        allMessagesDisplay.innerHTML = '';
+        adminLogsDisplay.innerHTML = ''; // Eski mesajları temizle
         const allMessages = [];
 
         try {
@@ -256,17 +284,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             allMessages.forEach(message => {
                 const getDisplayNameFromAllUsers = (uid) => {
-                    const user = allUsers.find(u => u.id === uid);
+                    // userMappings'deki UID'lerden isim bulma
                     const adminUserMapping = [
                         { uid: '0EdlNSUl34c7duJ7alK4EqSDkWN2', email: 'admin@example.com', name: 'Admin' },
                         { uid: 'nNhtAK4JUPYUYuJIyCBpWwZRMKF2', email: 'mert@may.com', name: 'Mert' },
                         { uid: 'g806NcWR4Oe6ha3RKXPEXSvczmA2', email: 'zeynep@may.com', name: 'Zeynep' },
                         { uid: 'dzIGu8GMr1VOETqLf5Lp1vC6dSw2', email: 'baran@may.com', name: 'Baran' },
                         { uid: 'Ex7mtNTGEUR9AXDpGE59kWaKGpP2', email: 'melike@may.com', name: 'Melike' }
-            ];
-                    const adminUser = adminUserMapping.find(u => u.uid === uid);
-                    if (adminUser) return adminUser.name;
-                    return user ? user.name : uid.substring(0, 6) + '...'; 
+                    ];
+                    const foundUser = adminUserMapping.find(u => u.uid === uid);
+                    return foundUser ? foundUser.name : uid.substring(0, 6) + '...'; 
                 };
 
                 const senderName = getDisplayNameFromAllUsers(message.senderId);
@@ -280,13 +307,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const logEntry = document.createElement('div');
                 logEntry.classList.add('admin-log-entry');
-                logEntry.textContent = `ID=${senderName} ID=${recipientName} mesaj > ${message.text}${timeString}`;
-                allMessagesDisplay.appendChild(logEntry);
+                logEntry.textContent = `Kimden: ${senderName} Kime: ${recipientName} Mesaj: ${message.text}${timeString}`; // Daha açıklayıcı bir format
+                adminLogsDisplay.appendChild(logEntry);
             });
 
         } catch (error) {
             console.error("Tüm mesajlar yüklenirken hata oluştu: ", error);
-            allMessagesDisplay.textContent = "Mesajlar yüklenirken bir hata oluştu.";
+            adminLogsDisplay.textContent = "Mesajlar yüklenirken bir hata oluştu.";
         }
     }
 });
