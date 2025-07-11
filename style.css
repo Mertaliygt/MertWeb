@@ -1,19 +1,19 @@
 /* Genel Stil Ayarları */
 :root {
-    --primary-bg-color: #1a1a2e;
-    --secondary-bg-color: #16213e;
-    --accent-color: #e94560;
-    --text-color: #e0e0e0;
-    --border-color: #0f3460;
-    --input-bg-color: #0a1128;
-    --placeholder-color: #7e8a97;
-    --shadow-color: rgba(0, 0, 0, 0.4);
-    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --primary-bg-color: #0d0c1d; /* Derin Gece Mavisi/Mor */
+    --secondary-bg-color: #1a193a; /* Bir tık açık tonu */
+    --accent-color: #00ff00; /* Matrix yeşili */
+    --text-color: #e0e0e0; /* Açık metin rengi */
+    --border-color: #2a2a4e; /* Daha koyu border */
+    --input-bg-color: #07071c; /* Input arka plan rengi */
+    --placeholder-color: #7e8a97; /* Placeholder rengi */
+    --shadow-color: rgba(0, 255, 0, 0.2); /* Yeşilimsi gölge */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    --hover-bg-color: #00aa00; /* Yeşil hover */
 }
 
 html {
-    /* Mobil cihazlarda varsayılan zoom'u kontrol eder */
-    font-size: 16px; /* Varsayılan font boyutu */
+    font-size: 16px;
 }
 
 body {
@@ -26,9 +26,9 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: auto; /* Kaydırma çubuklarını gerektiğinde göster */
+    overflow: auto;
     flex-direction: column;
-    box-sizing: border-box; /* Padding ve border'ı width/height içinde tut */
+    box-sizing: border-box;
 }
 
 /* Giriş Ekranı */
@@ -68,7 +68,7 @@ body {
     border-radius: 8px;
     background-color: var(--input-bg-color);
     color: var(--text-color);
-    font-size: 1em;
+    font-size: 1.1em; /* Zoom engellemek için 16px üstü */
     outline: none;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -79,7 +79,7 @@ body {
 
 .auth-box input:focus {
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.3);
+    box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.3);
 }
 
 .auth-box button {
@@ -88,7 +88,7 @@ body {
     border: none;
     border-radius: 8px;
     background-color: var(--accent-color);
-    color: white;
+    color: var(--primary-bg-color); /* Buton yazısı Matrix arka planı rengi olsun */
     font-size: 1.1em;
     font-weight: bold;
     cursor: pointer;
@@ -96,7 +96,7 @@ body {
 }
 
 .auth-box button:hover {
-    background-color: #c93550;
+    background-color: var(--hover-bg-color);
     transform: translateY(-2px);
 }
 
@@ -136,14 +136,14 @@ body {
     border: none;
     border-radius: 5px;
     background-color: var(--accent-color);
-    color: white;
+    color: var(--primary-bg-color);
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-left: 10px;
 }
 
 .top-nav button:hover {
-    background-color: #c93550;
+    background-color: var(--hover-bg-color);
 }
 
 /* Sohbet Kapsayıcısı */
@@ -190,13 +190,13 @@ body {
 }
 
 .user-list li:hover {
-    background-color: #2a3b5b;
+    background-color: #2a3b5b; /* Daha koyu tonlu hover */
     transform: translateX(5px);
 }
 
 .user-list li.active-user {
     background-color: var(--accent-color);
-    color: white;
+    color: var(--primary-bg-color);
     font-weight: bold;
 }
 
@@ -241,14 +241,14 @@ body {
 }
 
 .message.incoming {
-    background-color: #2a3b5b;
+    background-color: #2a3b5b; /* Daha koyu ton */
     align-self: flex-start;
     border-bottom-left-radius: 5px;
 }
 
 .message.outgoing {
     background-color: var(--accent-color);
-    color: white;
+    color: var(--primary-bg-color);
     align-self: flex-end;
     border-bottom-right-radius: 5px;
 }
@@ -268,7 +268,7 @@ body {
     border-radius: 25px;
     background-color: var(--input-bg-color);
     color: var(--text-color);
-    font-size: 1em;
+    font-size: 1.1em; /* Zoom engellemek için 16px üstü */
     outline: none;
     margin-right: 10px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -276,7 +276,7 @@ body {
 
 .message-input-area input:focus {
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.3);
+    box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.3);
 }
 
 .message-input-area button {
@@ -284,7 +284,7 @@ body {
     border: none;
     border-radius: 25px;
     background-color: var(--accent-color);
-    color: white;
+    color: var(--primary-bg-color);
     font-size: 1em;
     font-weight: bold;
     cursor: pointer;
@@ -292,7 +292,7 @@ body {
 }
 
 .message-input-area button:hover {
-    background-color: #c93550;
+    background-color: var(--hover-bg-color);
     transform: translateY(-1px);
 }
 
@@ -321,13 +321,13 @@ body {
     border: none;
     border-radius: 8px;
     background-color: var(--accent-color);
-    color: white;
+    color: var(--primary-bg-color);
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .admin-panel button:hover {
-    background-color: #c93550;
+    background-color: var(--hover-bg-color);
 }
 
 .admin-messages-display {
@@ -357,10 +357,10 @@ body {
 .footer {
     width: 100%;
     text-align: center;
-    padding: 10px; /* Daha az padding */
+    padding: 10px;
     background-color: var(--primary-bg-color);
     color: var(--placeholder-color);
-    font-size: 0.8em; /* Daha küçük font */
+    font-size: 0.8em;
     border-top: 1px solid var(--border-color);
     box-sizing: border-box;
     position: relative;
@@ -372,38 +372,38 @@ body {
 /* Mobil Uyumluluk (Responsive Design) */
 @media (max-width: 768px) {
     html {
-        font-size: 14px; /* Tablet boyutlarında genel font boyutunu küçült */
+        font-size: 15px; /* Genel font boyutunu biraz daha küçük tut */
     }
 
     body {
         padding: 0;
         min-height: 100vh;
-        align-items: stretch; /* İçeriğin genişliği kaplamasını sağlar */
-        overflow-x: hidden; /* Yatay kaydırmayı engeller */
+        align-items: stretch;
+        overflow-x: hidden;
     }
 
     .auth-container {
-        padding: 10px; /* Daha az padding */
+        padding: 10px;
     }
 
     .auth-box {
-        padding: 20px; /* Daha az padding */
-        margin: 0 5px; /* Kenarlara daha az boşluk */
-        max-width: 350px; /* Giriş kutusu için maksimum genişlik */
+        padding: 20px;
+        margin: 0 5px;
+        max-width: 350px;
     }
 
     .auth-box h2 {
-        font-size: 1.6em; /* Font boyutunu küçült */
+        font-size: 1.5em;
     }
 
     .auth-box input {
-        padding: 12px 10px; /* Daha az padding */
-        font-size: 0.9em; /* Font boyutunu küçült */
+        padding: 10px;
+        font-size: 1.1em; /* Mobil zoomu engellemek için 16px veya üstü tutmak önemli */
     }
 
     .auth-box button {
-        padding: 12px; /* Daha az padding */
-        font-size: 1em; /* Font boyutunu küçült */
+        padding: 10px;
+        font-size: 1em;
     }
 
     .app-container {
@@ -414,95 +414,103 @@ body {
         border-radius: 0;
         margin: 0;
         box-shadow: none;
-        overflow: hidden; /* İçeriğin dışarı taşmasını engelle */
+        overflow: hidden;
     }
 
     .top-nav {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 8px 10px; /* Daha az padding */
+        padding: 8px 10px;
         position: sticky;
         top: 0;
         z-index: 10;
         height: auto;
-        font-size: 0.9em; /* Font boyutunu küçült */
+        font-size: 0.9em;
     }
 
     .top-nav span {
         margin-bottom: 0;
         flex-grow: 1;
         text-align: left;
-        padding-right: 5px; /* Butonlarla çakışmayı önlemek için */
+        padding-right: 5px;
     }
 
     .top-nav button {
-        margin-left: 5px; /* Butonlar arası boşluğu azalt */
+        margin-left: 5px;
         margin-top: 0;
         flex-shrink: 0;
-        padding: 6px 10px; /* Daha az padding */
-        font-size: 0.8em; /* Font boyutunu küçült */
+        padding: 6px 10px;
+        font-size: 0.8em;
     }
 
     .chat-container {
         flex-direction: column;
         flex: 1;
-        height: calc(100vh - (var(--top-nav-height) + var(--input-area-height) + var(--footer-height))); /* Dinamik yükseklik */
-        min-height: 0;
+        min-height: 0; /* İçeriğin sıkışmasını engeller */
     }
 
     .sidebar {
         width: 100%;
         height: auto;
-        max-height: 100px; /* Kullanıcı listesi için maksimum yükseklik */
+        max-height: 100px;
         border-right: none;
         border-bottom: 1px solid var(--border-color);
-        padding: 8px; /* Daha az padding */
+        padding: 8px;
         order: 1;
         box-sizing: border-box;
     }
 
     .sidebar h3 {
         text-align: center;
-        margin-bottom: 8px; /* Daha az margin */
-        font-size: 1em; /* Font boyutunu küçült */
+        margin-bottom: 8px;
+        font-size: 0.9em; /* Daha da küçült */
+    }
+
+    .user-list {
+        display: flex; /* Kullanıcıları yan yana sıralamak için */
+        flex-wrap: nowrap; /* Alt alta geçmesin */
+        overflow-x: auto; /* Yanlamasına kaydırılabilir yap */
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 5px; /* Kaydırma çubuğu için boşluk */
     }
 
     .user-list li {
-        justify-content: center;
-        padding: 6px; /* Daha az padding */
-        font-size: 0.8em; /* Font boyutunu küçült */
-        margin-bottom: 4px; /* Daha az margin */
+        flex-shrink: 0; /* Küçülmesini engelle */
+        padding: 6px 10px; /* Daha az padding */
+        font-size: 0.8em;
+        margin: 0 4px 0 0; /* Sadece sağa boşluk */
+        white-space: nowrap; /* Metnin tek satırda kalmasını sağlar */
     }
 
     .chat-area {
         flex: 1;
         order: 2;
-        min-height: 0; /* İçeriğin sıkışmasını engeller */
+        min-height: 0;
     }
 
     .chat-header {
-        padding: 8px 10px; /* Daha az padding */
+        padding: 8px 10px;
         text-align: center;
-        font-size: 1em; /* Font boyutunu küçült */
+        font-size: 1em;
     }
 
     .messages {
         flex: 1;
-        padding: 10px; /* Daha az padding */
+        padding: 10px;
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch; /* iOS'ta daha pürüzsüz kaydırma */
+        -webkit-overflow-scrolling: touch;
     }
 
     .message {
         max-width: 95%;
-        font-size: 0.85em; /* Font boyutunu küçült */
-        padding: 7px 10px; /* Daha az padding */
+        font-size: 0.85em;
+        padding: 7px 10px;
         margin-bottom: 8px;
     }
 
     .message-input-area {
-        padding: 10px; /* Daha az padding */
+        padding: 10px;
         flex-direction: row;
         position: sticky;
         bottom: 0;
@@ -511,14 +519,14 @@ body {
     }
 
     .message-input-area input {
-        padding: 8px 10px; /* Daha az padding */
-        margin-right: 5px; /* Daha az margin */
-        font-size: 0.9em; /* Font boyutunu küçült */
+        padding: 8px 10px;
+        margin-right: 5px;
+        font-size: 1.1em; /* Zoomu engellemek için 16px veya üstü tutmak önemli */
     }
 
     .message-input-area button {
-        padding: 8px 15px; /* Daha az padding */
-        font-size: 0.9em; /* Font boyutunu küçült */
+        padding: 8px 15px;
+        font-size: 0.9em;
     }
 
     .admin-panel {
@@ -533,62 +541,67 @@ body {
     }
 
     .footer {
-        position: relative; /* Fixed yerine relative/static daha iyi olabilir */
+        position: relative;
         padding: 8px;
-        font-size: 0.7em; /* Daha da küçük font */
+        font-size: 0.7em;
     }
 }
 
 @media (max-width: 480px) {
     html {
-        font-size: 12px; /* Telefon boyutlarında genel font boyutunu daha da küçült */
+        font-size: 14px; /* Çok küçük ekranlar için genel font boyutunu daha da optimize et */
     }
     
     .auth-box {
-        padding: 15px;
+        padding: 10px;
+        margin: 0 5px;
     }
 
     .auth-box h2 {
-        font-size: 1.4em;
+        font-size: 1.3em;
     }
 
     .auth-box input, .auth-box button {
-        font-size: 0.85em;
-        padding: 10px;
+        font-size: 1.05em; /* Yine de 16px üstü tutmaya çalışıyorum */
+        padding: 8px;
     }
 
     .top-nav {
-        padding: 6px 8px;
-        font-size: 0.8em;
-    }
-
-    .top-nav button {
         padding: 5px 8px;
         font-size: 0.75em;
     }
 
+    .top-nav button {
+        padding: 4px 6px;
+        font-size: 0.7em;
+    }
+
     .sidebar {
-        max-height: 90px; /* Daha da küçük kullanıcı listesi */
+        max-height: 80px; /* Daha da küçük kullanıcı listesi */
         padding: 5px;
     }
 
+    .sidebar h3 {
+        font-size: 0.85em;
+    }
+
     .user-list li {
-        padding: 5px;
+        padding: 4px 8px;
         font-size: 0.75em;
     }
 
     .chat-header {
-        padding: 6px 8px;
+        padding: 5px 8px;
         font-size: 0.9em;
     }
 
     .messages {
-        padding: 6px;
+        padding: 5px;
     }
 
     .message {
-        padding: 5px 8px;
-        font-size: 0.75em;
+        padding: 4px 8px;
+        font-size: 0.8em;
     }
 
     .message-input-area {
@@ -597,29 +610,29 @@ body {
 
     .message-input-area input {
         padding: 6px 8px;
-        font-size: 0.8em;
+        font-size: 1.05em;
     }
 
     .message-input-area button {
         padding: 6px 12px;
-        font-size: 0.8em;
+        font-size: 0.85em;
     }
 
     .admin-panel h2 {
-        font-size: 1.3em;
+        font-size: 1.2em;
     }
 
     .admin-panel button {
         padding: 6px 12px;
-        font-size: 0.85em;
+        font-size: 0.8em;
     }
 
     .admin-log-entry {
-        font-size: 0.75em;
+        font-size: 0.7em;
     }
 
     .footer {
-        padding: 6px;
-        font-size: 0.65em;
+        padding: 5px;
+        font-size: 0.6em;
     }
 }
