@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
             appContainer.style.display = 'flex'; // Ana uygulama divini göster
 
             // Admin kontrolü
-            if (user.email === 'admin@example.com') { // Admin e-postası ile kontrol
+            if (user.email === 'admin') { // Admin e-postası ile kontrol
                 adminPanelButton.style.display = 'block';
             } else {
                 adminPanelButton.style.display = 'none';
