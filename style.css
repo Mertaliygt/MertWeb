@@ -1,4 +1,4 @@
-/* Genel Stil Ayarları */
+/* Genel Stil Ayarları - Değişiklik Yok */
 :root {
     --primary-bg-color: #0d0c1d; /* Derin Gece Mavisi/Mor */
     --secondary-bg-color: #1a193a; /* Bir tık açık tonu */
@@ -31,7 +31,7 @@ body {
     box-sizing: border-box;
 }
 
-/* Giriş Ekranı */
+/* Giriş Ekranı - Değişiklik Yok */
 .auth-container {
     display: flex;
     justify-content: center;
@@ -68,7 +68,7 @@ body {
     border-radius: 8px;
     background-color: var(--input-bg-color);
     color: var(--text-color);
-    font-size: 1.1em; /* Zoom engellemek için 16px üstü */
+    font-size: 1.1em;
     outline: none;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -88,7 +88,7 @@ body {
     border: none;
     border-radius: 8px;
     background-color: var(--accent-color);
-    color: var(--primary-bg-color); /* Buton yazısı Matrix arka planı rengi olsun */
+    color: var(--primary-bg-color);
     font-size: 1.1em;
     font-weight: bold;
     cursor: pointer;
@@ -100,7 +100,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* Ana Uygulama Alanı */
+/* Ana Uygulama Alanı - Değişiklik Yok */
 .app-container {
     display: flex;
     flex-direction: column;
@@ -118,7 +118,7 @@ body {
     box-sizing: border-box;
 }
 
-/* Üst Navigasyon */
+/* Üst Navigasyon - Değişiklik Yok */
 .top-nav {
     display: flex;
     justify-content: space-between;
@@ -146,7 +146,7 @@ body {
     background-color: var(--hover-bg-color);
 }
 
-/* Sohbet Kapsayıcısı */
+/* Sohbet Kapsayıcısı - Değişiklik Yok */
 .chat-container {
     display: flex;
     flex: 1;
@@ -187,10 +187,12 @@ body {
     color: var(--text-color);
     display: flex;
     align-items: center;
+    /* Masaüstü görünümünde kullanıcı ismi font boyutu */
+    font-size: 1.1em; /* Bir miktar büyütüldü */
 }
 
 .user-list li:hover {
-    background-color: #2a3b5b; /* Daha koyu tonlu hover */
+    background-color: #2a3b5b;
     transform: translateX(5px);
 }
 
@@ -209,12 +211,13 @@ body {
     box-sizing: border-box;
 }
 
+/* Sohbet Başlığı - CHAT HEADER KISMINDAKİ DEĞİŞİKLİK */
 .chat-header {
     background-color: var(--primary-bg-color);
-    padding: 15px 25px;
+    padding: 10px 20px; /* Padding azaltıldı, çerçeve daha ince */
     border-bottom: 1px solid var(--border-color);
     color: var(--text-color);
-    font-size: 1.2em;
+    font-size: 1em; /* Font boyutu küçültüldü */
     font-weight: bold;
 }
 
@@ -241,7 +244,7 @@ body {
 }
 
 .message.incoming {
-    background-color: #2a3b5b; /* Daha koyu ton */
+    background-color: #2a3b5b;
     align-self: flex-start;
     border-bottom-left-radius: 5px;
 }
@@ -268,7 +271,7 @@ body {
     border-radius: 25px;
     background-color: var(--input-bg-color);
     color: var(--text-color);
-    font-size: 1.1em; /* Zoom engellemek için 16px üstü */
+    font-size: 1.1em;
     outline: none;
     margin-right: 10px;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -296,7 +299,7 @@ body {
     transform: translateY(-1px);
 }
 
-/* Admin Paneli */
+/* Admin Paneli - Değişiklik Yok */
 .admin-panel {
     display: flex;
     flex-direction: column;
@@ -353,7 +356,7 @@ body {
     border-bottom: none;
 }
 
-/* Footer */
+/* Footer - Değişiklik Yok */
 .footer {
     width: 100%;
     text-align: center;
@@ -372,7 +375,7 @@ body {
 /* Mobil Uyumluluk (Responsive Design) */
 @media (max-width: 768px) {
     html {
-        font-size: 15px; /* Genel font boyutunu biraz daha küçük tut */
+        font-size: 15px;
     }
 
     body {
@@ -398,7 +401,7 @@ body {
 
     .auth-box input {
         padding: 10px;
-        font-size: 1.1em; /* Mobil zoomu engellemek için 16px veya üstü tutmak önemli */
+        font-size: 1.1em;
     }
 
     .auth-box button {
@@ -447,7 +450,7 @@ body {
     .chat-container {
         flex-direction: column;
         flex: 1;
-        min-height: 0; /* İçeriğin sıkışmasını engeller */
+        min-height: 0;
     }
 
     .sidebar {
@@ -464,23 +467,24 @@ body {
     .sidebar h3 {
         text-align: center;
         margin-bottom: 8px;
-        font-size: 0.9em; /* Daha da küçült */
+        font-size: 0.9em;
     }
 
     .user-list {
-        display: flex; /* Kullanıcıları yan yana sıralamak için */
-        flex-wrap: nowrap; /* Alt alta geçmesin */
-        overflow-x: auto; /* Yanlamasına kaydırılabilir yap */
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        padding-bottom: 5px; /* Kaydırma çubuğu için boşluk */
+        padding-bottom: 5px;
     }
 
+    /* MOBİL GÖRÜNÜMDE KULLANICI İSMİ FONT BOYUTU */
     .user-list li {
-        flex-shrink: 0; /* Küçülmesini engelle */
-        padding: 6px 10px; /* Daha az padding */
-        font-size: 0.8em;
-        margin: 0 4px 0 0; /* Sadece sağa boşluk */
-        white-space: nowrap; /* Metnin tek satırda kalmasını sağlar */
+        flex-shrink: 0;
+        padding: 6px 10px;
+        font-size: 1.0em; /* Font boyutu büyütüldü */
+        margin: 0 4px 0 0;
+        white-space: nowrap;
     }
 
     .chat-area {
@@ -489,10 +493,11 @@ body {
         min-height: 0;
     }
 
+    /* MOBİL GÖRÜNÜMDE CHAT HEADER */
     .chat-header {
-        padding: 8px 10px;
+        padding: 6px 10px; /* Padding daha da azaltıldı */
         text-align: center;
-        font-size: 1em;
+        font-size: 0.9em; /* Font boyutu küçültüldü */
     }
 
     .messages {
@@ -521,7 +526,7 @@ body {
     .message-input-area input {
         padding: 8px 10px;
         margin-right: 5px;
-        font-size: 1.1em; /* Zoomu engellemek için 16px veya üstü tutmak önemli */
+        font-size: 1.1em;
     }
 
     .message-input-area button {
@@ -549,7 +554,7 @@ body {
 
 @media (max-width: 480px) {
     html {
-        font-size: 14px; /* Çok küçük ekranlar için genel font boyutunu daha da optimize et */
+        font-size: 14px;
     }
     
     .auth-box {
@@ -562,7 +567,7 @@ body {
     }
 
     .auth-box input, .auth-box button {
-        font-size: 1.05em; /* Yine de 16px üstü tutmaya çalışıyorum */
+        font-size: 1.05em;
         padding: 8px;
     }
 
@@ -577,22 +582,24 @@ body {
     }
 
     .sidebar {
-        max-height: 80px; /* Daha da küçük kullanıcı listesi */
+        max-height: 80px;
         padding: 5px;
     }
 
     .sidebar h3 {
-        font-size: 0.85em;
+        font-size: 0.8em; /* Daha da küçültüldü */
     }
 
+    /* ÇOK KÜÇÜK EKRANLAR İÇİN KULLANICI İSMİ FONT BOYUTU */
     .user-list li {
         padding: 4px 8px;
-        font-size: 0.75em;
+        font-size: 0.9em; /* Daha da büyütüldü */
     }
 
+    /* ÇOK KÜÇÜK EKRANLAR İÇİN CHAT HEADER */
     .chat-header {
         padding: 5px 8px;
-        font-size: 0.9em;
+        font-size: 0.85em; /* Daha da küçültüldü */
     }
 
     .messages {
