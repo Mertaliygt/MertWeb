@@ -1,6 +1,6 @@
 :root {
     --bg-color: #000000; /* Siyah arka plan */
-    --text-color: #00FF00; /* Yeşil metin */
+    --text-color: #ff5100; /* Yeşil metin */
     --input-bg: #1A1A1A; /* Hafif gri, koyu input arka planı */
     --accent-color: #00AA00; /* Vurgu rengi (butonlar vb.) */
     --sidebar-bg: #0A0A0A; /* Sidebar için daha koyu siyah */
