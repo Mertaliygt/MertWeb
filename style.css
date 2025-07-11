@@ -1,177 +1,480 @@
+/* Genel Stil Ayarları */
 :root {
-    --bg-color: #000000; /* Siyah arka plan */
-    --text-color: #ff5100; /* Yeşil metin */
-    --input-bg: #1A1A1A; /* Hafif gri, koyu input arka planı */
-    --accent-color: #00AA00; /* Vurgu rengi (butonlar vb.) */
-    --sidebar-bg: #0A0A0A; /* Sidebar için daha koyu siyah */
+    --primary-bg-color: #1a1a2e; /* Koyu arka plan */
+    --secondary-bg-color: #16213e; /* Daha açık koyu arka plan */
+    --accent-color: #e94560; /* Vurgu rengi */
+    --text-color: #e0e0e0; /* Açık metin rengi */
+    --border-color: #0f3460; /* Çerçeve rengi */
+    --input-bg-color: #0a1128; /* Input arka plan rengi */
+    --placeholder-color: #7e8a97; /* Placeholder rengi */
+    --shadow-color: rgba(0, 0, 0, 0.4); /* Gölge rengi */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
 }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    font-family: var(--font-family);
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden; /* Kenarlarda scroll olmasını engeller */
+    min-height: 100vh;
+    overflow: hidden; /* Kaydırma çubuklarını gizle */
+    flex-direction: column; /* Footer için */
 }
 
-/* --- Genel Arayüz ve Layout --- */
-
-.auth-container, .chat-container {
-    border: 1px solid var(--accent-color);
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
-}
-
-/* --- Giriş Ekranı --- */
-
+/* Giriş Ekranı */
 .auth-container {
-    width: 350px;
-    padding: 30px;
-    background-color: var(--sidebar-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.auth-box {
+    background-color: var(--secondary-bg-color);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color);
 }
 
 .auth-box h2 {
-    color: var(--text-color);
-    text-align: center;
-    margin-bottom: 25px;
+    color: var(--accent-color);
+    margin-bottom: 30px;
+    font-size: 2em;
 }
 
-input[type="text"], 
-input[type="password"] {
-    width: 100%;
-    padding: 15px;
+.auth-box input {
+    width: calc(100% - 20px);
+    padding: 15px 10px;
     margin-bottom: 20px;
-    border: 1px solid var(--accent-color);
-    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg-color);
     color: var(--text-color);
-    border-radius: 5px;
-    box-sizing: border-box;
+    font-size: 1em;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-button[type="submit"] {
+.auth-box input::placeholder {
+    color: var(--placeholder-color);
+}
+
+.auth-box input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.3);
+}
+
+.auth-box button {
     width: 100%;
     padding: 15px;
-    background-color: var(--accent-color);
-    color: var(--bg-color);
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-box button:hover {
+    background-color: #c93550;
+    transform: translateY(-2px);
+}
+
+/* Ana Uygulama Alanı */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px; /* Maksimum genişlik */
+    height: 90vh; /* Ekran yüksekliğinin %90'ı */
+    background-color: var(--secondary-bg-color);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin-top: 20px; /* Footer için boşluk */
+    margin-bottom: 20px; /* Footer için boşluk */
+}
+
+/* Üst Navigasyon */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: var(--primary-bg-color);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
     font-weight: bold;
 }
 
-button[type="submit"]:hover {
-    background-color: #00EE00;
+.top-nav button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--accent-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
 }
 
-/* --- Mesajlaşma Arayüzü (Chat) --- */
+.top-nav button:hover {
+    background-color: #c93550;
+}
 
+/* Sohbet Kapsayıcısı */
 .chat-container {
     display: flex;
-    width: 80%;
-    max-width: 1200px;
-    height: 90vh;
-    background-color: var(--bg-color);
+    flex: 1; /* Kalan alanı kapla */
 }
 
+/* Sol Panel (Kullanıcı Listesi) */
 .sidebar {
-    width: 250px;
-    background-color: var(--sidebar-bg);
-    padding: 20px 0;
-    border-right: 1px solid var(--accent-color);
+    width: 280px;
+    background-color: var(--primary-bg-color);
+    border-right: 1px solid var(--border-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
 }
 
-.user-list h3 {
-    padding: 0 20px;
-    margin-bottom: 15px;
-    color: var(--text-color);
+.sidebar h3 {
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.3em;
 }
 
-.user-list ul {
-    list-style-type: none;
+.user-list {
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
 .user-list li {
-    padding: 10px 20px;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background-color: var(--input-bg-color);
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
 }
 
-.user-list li:hover, .active-user {
-    background-color: var(--input-bg);
+.user-list li:hover {
+    background-color: #2a3b5b;
+    transform: translateX(5px);
 }
 
+.user-list li.active-user {
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: bold;
+}
+
+/* Sohbet Alanı */
 .chat-area {
-    flex-grow: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-bg-color);
+}
+
+.chat-header {
+    background-color: var(--primary-bg-color);
+    padding: 15px 25px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
 }
 
-.chat-header {
-    background-color: var(--sidebar-bg);
-    padding: 15px 20px;
-    border-bottom: 1px solid var(--accent-color);
-}
-
-.messages {
-    flex-grow: 1;
-    padding: 20px;
-    overflow-y: auto;
-    /* Mesaj kaydırma alanı */
-}
-
-/* Mesaj Stilleri */
 .message {
-    padding: 10px;
-    border-radius: 10px;
-    margin-bottom: 15px;
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.incoming {
-    background-color: #1A1A1A;
+.message p {
+    margin: 0;
+}
+
+.message.incoming {
+    background-color: #2a3b5b;
     align-self: flex-start;
+    border-bottom-left-radius: 5px;
 }
 
-.outgoing {
+.message.outgoing {
     background-color: var(--accent-color);
-    color: var(--bg-color);
-    text-align: right;
+    color: white;
     align-self: flex-end;
+    border-bottom-right-radius: 5px;
 }
 
-/* Mesaj Gönderme Alanı */
 .message-input-area {
-    padding: 20px;
-    border-top: 1px solid var(--accent-color);
     display: flex;
-    background-color: var(--sidebar-bg);
+    padding: 20px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--primary-bg-color);
 }
 
-#messageInput {
-    flex-grow: 1;
-    padding: 15px;
-    border: 1px solid var(--accent-color);
-    background-color: var(--input-bg);
+.message-input-area input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    background-color: var(--input-bg-color);
     color: var(--text-color);
-    border-radius: 5px;
+    font-size: 1em;
+    outline: none;
+    margin-right: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-#sendButton {
-    padding: 15px 30px;
-    margin-left: 10px;
-    background-color: var(--accent-color);
-    color: var(--bg-color);
+.message-input-area input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(233, 69, 96, 0.3);
+}
+
+.message-input-area button {
+    padding: 12px 25px;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px;
+    background-color: var(--accent-color);
+    color: white;
+    font-size: 1em;
+    font-weight: bold;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-#sendButton:hover {
-    background-color: #00EE00;
+.message-input-area button:hover {
+    background-color: #c93550;
+    transform: translateY(-1px);
+}
+
+/* Admin Paneli */
+.admin-panel {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px;
+    background-color: var(--secondary-bg-color);
+    overflow-y: auto;
+}
+
+.admin-panel h2 {
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.admin-panel button {
+    align-self: flex-start;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--accent-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-panel button:hover {
+    background-color: #c93550;
+}
+
+.admin-messages-display {
+    background-color: var(--primary-bg-color);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    flex: 1;
+    overflow-y: auto;
+    white-space: pre-wrap; /* Uzun metinlerin sarılmasını sağlar */
+    word-wrap: break-word;
+}
+
+.admin-log-entry {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border-color);
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.admin-log-entry:last-child {
+    border-bottom: none;
+}
+
+/* Footer */
+.footer {
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    background-color: var(--primary-bg-color);
+    color: var(--placeholder-color);
+    font-size: 0.85em;
+    border-top: 1px solid var(--border-color);
+    box-sizing: border-box;
+    position: sticky; /* Sayfanın altına yapışık kalır */
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Diğer elemanların üzerinde kalmasını sağlar */
+}
+
+/* Mobil Uyumluluk (Responsive Design) */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .auth-box {
+        padding: 30px 20px;
+        margin: 20px;
+    }
+
+    .app-container {
+        flex-direction: column; /* Mobil cihazlarda dikey düzen */
+        height: 95vh; /* Daha fazla ekran alanı kullan */
+        width: calc(100% - 20px); /* Kenarlardan boşluk */
+        margin: 10px;
+    }
+
+    .chat-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        max-height: 200px; /* Kullanıcı listesi için maksimum yükseklik */
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 15px;
+    }
+
+    .sidebar h3 {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .user-list li {
+        justify-content: center; /* Mobil ortalama */
+        padding: 10px;
+    }
+
+    .chat-area {
+        flex: 1; /* Kalan alanı kapla */
+    }
+
+    .chat-header {
+        padding: 15px 20px;
+        text-align: center;
+    }
+
+    .messages {
+        padding: 15px;
+    }
+
+    .message {
+        max-width: 90%; /* Mobil daha geniş mesajlar */
+        font-size: 0.95em;
+    }
+
+    .message-input-area {
+        padding: 15px;
+    }
+
+    .message-input-area input {
+        padding: 10px 12px;
+    }
+
+    .message-input-area button {
+        padding: 10px 20px;
+    }
+
+    .admin-panel {
+        padding: 15px;
+    }
+
+    .admin-panel button {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-box {
+        padding: 25px 15px;
+    }
+
+    .auth-box h2 {
+        font-size: 1.8em;
+    }
+
+    .auth-box input, .auth-box button {
+        font-size: 0.95em;
+        padding: 12px;
+    }
+
+    .top-nav {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .top-nav span {
+        margin-bottom: 10px;
+    }
+
+    .top-nav button {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    .message-input-area {
+        flex-direction: column;
+    }
+
+    .message-input-area input {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    .message-input-area button {
+        width: 100%;
+    }
 }
