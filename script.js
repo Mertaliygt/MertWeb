@@ -102,11 +102,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // oluşturduğunuz kullanıcıların GERÇEK UID'leri ile doldurmanız GEREKİYOR.
             // Her bir kullanıcının UID'sini Authentication panelinden kopyalayın!
             const userMappings = [
-                { uid: 'YOUR_ADMIN_UID', email: 'admin@example.com', name: 'Admin' },
-                { uid: 'YOUR_MERT_UID', email: 'mert@example.com', name: 'Mert' },
-                { uid: 'YOUR_ZEYNEP_UID', email: 'zeynep@example.com', name: 'Zeynep' },
-                { uid: 'YOUR_BARAN_UID', email: 'baran@example.com', name: 'Baran' },
-                { uid: 'YOUR_MELIKE_UID', email: 'melike@example.com', name: 'Melike' }
+                { uid: '0EdlNSUl34c7duJ7alK4EqSDkWN2', email: 'admin@example.com', name: 'Admin' },
+                { uid: 'jDdniNAtuoSdNq4mht96pcvMFph1', email: 'mert@example.com', name: 'Mert' },
+                { uid: 'BzsJeb4L1OTb850fibgs5ZgE1tg2', email: 'zeynep@example.com', name: 'Zeynep' },
+                { uid: '82UKk2pogpNbD8laDSUDVobVm5q2', email: 'baran@example.com', name: 'Baran' },
+                { uid: '0iZuX6rG6vXMDE6liIgpnblooLW2', email: 'melike@example.com', name: 'Melike' }
             ];
 
             // Oluşturduğunuz kullanıcıları 'allUsers' array'ine ekle
