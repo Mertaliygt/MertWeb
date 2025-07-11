@@ -6,7 +6,6 @@
     <title>Özel Mesajlaşma Platformu</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<script src="script.js"></script>
 <body>
 
     <div class="auth-container">
@@ -25,10 +24,10 @@
         <div class="sidebar">
             <div class="user-list">
                 <h3>Kullanıcılar</h3>
-                <ul>
-                    <li class="active-user">Kullanıcı 1 (Aktif)</li>
-                    <li>Kullanıcı 2</li>
-                    <li>Kullanıcı 3</li>
+                <ul id="userList">
+                    <li data-id="user1">Test Kullanıcı 1</li>
+                    <li data-id="user2">Test Kullanıcı 2</li>
+                    <li data-id="user3">Test Kullanıcı 3</li>
                 </ul>
             </div>
         </div>
@@ -36,17 +35,11 @@
         <div class="chat-area">
             
             <header class="chat-header">
-                <h2>Sohbet (Kullanıcı 1)</h2>
+                <h2 id="chatRecipientName">Sohbet (Kişi Seçin)</h2>
             </header>
             
-            <div class="messages">
-                <div class="message incoming">
-                    <p>Merhaba, özel bir mesajım var.</p>
+            <div class="messages" id="messagesDisplay">
                 </div>
-                <div class="message outgoing">
-                    <p>Tamam, dinliyorum.</p>
-                </div>
-            </div>
             
             <div class="message-input-area">
                 <input type="text" id="messageInput" placeholder="Mesaj yazın...">
@@ -54,6 +47,11 @@
             </div>
         </div>
     </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    
+    <script src="script.js"></script>
 
 </body>
 </html>
