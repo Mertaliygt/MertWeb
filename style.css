@@ -1,3 +1,4 @@
+/* Genel Stil Ayarları */
 :root {
     --primary-bg-color: #1a1a2e;
     --secondary-bg-color: #16213e;
@@ -10,6 +11,11 @@
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+html {
+    /* Mobil cihazlarda varsayılan zoom'u kontrol eder */
+    font-size: 16px; /* Varsayılan font boyutu */
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -20,10 +26,12 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    overflow: auto;
+    overflow: auto; /* Kaydırma çubuklarını gerektiğinde göster */
     flex-direction: column;
+    box-sizing: border-box; /* Padding ve border'ı width/height içinde tut */
 }
 
+/* Giriş Ekranı */
 .auth-container {
     display: flex;
     justify-content: center;
@@ -92,6 +100,7 @@ body {
     transform: translateY(-2px);
 }
 
+/* Ana Uygulama Alanı */
 .app-container {
     display: flex;
     flex-direction: column;
@@ -106,8 +115,10 @@ body {
     border: 1px solid var(--border-color);
     margin-top: 20px;
     margin-bottom: 20px;
+    box-sizing: border-box;
 }
 
+/* Üst Navigasyon */
 .top-nav {
     display: flex;
     justify-content: space-between;
@@ -135,11 +146,13 @@ body {
     background-color: #c93550;
 }
 
+/* Sohbet Kapsayıcısı */
 .chat-container {
     display: flex;
     flex: 1;
 }
 
+/* Sol Panel (Kullanıcı Listesi) */
 .sidebar {
     width: 280px;
     background-color: var(--primary-bg-color);
@@ -148,6 +161,7 @@ body {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
+    box-sizing: border-box;
 }
 
 .sidebar h3 {
@@ -186,11 +200,13 @@ body {
     font-weight: bold;
 }
 
+/* Sohbet Alanı */
 .chat-area {
     flex: 1;
     display: flex;
     flex-direction: column;
     background-color: var(--secondary-bg-color);
+    box-sizing: border-box;
 }
 
 .chat-header {
@@ -242,6 +258,7 @@ body {
     padding: 20px;
     border-top: 1px solid var(--border-color);
     background-color: var(--primary-bg-color);
+    box-sizing: border-box;
 }
 
 .message-input-area input {
@@ -279,6 +296,7 @@ body {
     transform: translateY(-1px);
 }
 
+/* Admin Paneli */
 .admin-panel {
     display: flex;
     flex-direction: column;
@@ -286,6 +304,7 @@ body {
     padding: 20px;
     background-color: var(--secondary-bg-color);
     overflow-y: auto;
+    box-sizing: border-box;
 }
 
 .admin-panel h2 {
@@ -334,13 +353,14 @@ body {
     border-bottom: none;
 }
 
+/* Footer */
 .footer {
     width: 100%;
     text-align: center;
-    padding: 15px;
+    padding: 10px; /* Daha az padding */
     background-color: var(--primary-bg-color);
     color: var(--placeholder-color);
-    font-size: 0.85em;
+    font-size: 0.8em; /* Daha küçük font */
     border-top: 1px solid var(--border-color);
     box-sizing: border-box;
     position: relative;
@@ -349,20 +369,41 @@ body {
     z-index: 100;
 }
 
+/* Mobil Uyumluluk (Responsive Design) */
 @media (max-width: 768px) {
+    html {
+        font-size: 14px; /* Tablet boyutlarında genel font boyutunu küçült */
+    }
+
     body {
         padding: 0;
         min-height: 100vh;
-        align-items: stretch;
+        align-items: stretch; /* İçeriğin genişliği kaplamasını sağlar */
+        overflow-x: hidden; /* Yatay kaydırmayı engeller */
     }
 
     .auth-container {
-        padding: 15px;
+        padding: 10px; /* Daha az padding */
     }
 
     .auth-box {
-        padding: 30px 20px;
-        margin: 0 10px;
+        padding: 20px; /* Daha az padding */
+        margin: 0 5px; /* Kenarlara daha az boşluk */
+        max-width: 350px; /* Giriş kutusu için maksimum genişlik */
+    }
+
+    .auth-box h2 {
+        font-size: 1.6em; /* Font boyutunu küçült */
+    }
+
+    .auth-box input {
+        padding: 12px 10px; /* Daha az padding */
+        font-size: 0.9em; /* Font boyutunu küçült */
+    }
+
+    .auth-box button {
+        padding: 12px; /* Daha az padding */
+        font-size: 1em; /* Font boyutunu küçült */
     }
 
     .app-container {
@@ -373,96 +414,111 @@ body {
         border-radius: 0;
         margin: 0;
         box-shadow: none;
+        overflow: hidden; /* İçeriğin dışarı taşmasını engelle */
     }
 
     .top-nav {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 10px 15px;
+        padding: 8px 10px; /* Daha az padding */
         position: sticky;
         top: 0;
         z-index: 10;
         height: auto;
+        font-size: 0.9em; /* Font boyutunu küçült */
     }
 
     .top-nav span {
         margin-bottom: 0;
         flex-grow: 1;
         text-align: left;
+        padding-right: 5px; /* Butonlarla çakışmayı önlemek için */
     }
 
     .top-nav button {
-        margin-left: 10px;
+        margin-left: 5px; /* Butonlar arası boşluğu azalt */
         margin-top: 0;
         flex-shrink: 0;
+        padding: 6px 10px; /* Daha az padding */
+        font-size: 0.8em; /* Font boyutunu küçült */
     }
 
     .chat-container {
         flex-direction: column;
         flex: 1;
+        height: calc(100vh - (var(--top-nav-height) + var(--input-area-height) + var(--footer-height))); /* Dinamik yükseklik */
+        min-height: 0;
     }
 
     .sidebar {
         width: 100%;
         height: auto;
-        max-height: 150px;
+        max-height: 100px; /* Kullanıcı listesi için maksimum yükseklik */
         border-right: none;
         border-bottom: 1px solid var(--border-color);
-        padding: 10px;
-        order: 1; /* Mobil görünümde sohbet alanının üstünde olsun */
+        padding: 8px; /* Daha az padding */
+        order: 1;
+        box-sizing: border-box;
     }
 
     .sidebar h3 {
         text-align: center;
-        margin-bottom: 10px;
-        font-size: 1.1em;
+        margin-bottom: 8px; /* Daha az margin */
+        font-size: 1em; /* Font boyutunu küçült */
     }
 
     .user-list li {
         justify-content: center;
-        padding: 8px;
-        font-size: 0.9em;
+        padding: 6px; /* Daha az padding */
+        font-size: 0.8em; /* Font boyutunu küçült */
+        margin-bottom: 4px; /* Daha az margin */
     }
 
     .chat-area {
         flex: 1;
-        order: 2; /* Sohbet alanı kullanıcı listesinin altında olsun */
+        order: 2;
+        min-height: 0; /* İçeriğin sıkışmasını engeller */
     }
 
     .chat-header {
-        padding: 10px 15px;
+        padding: 8px 10px; /* Daha az padding */
         text-align: center;
-        font-size: 1.1em;
+        font-size: 1em; /* Font boyutunu küçült */
     }
 
     .messages {
-        padding: 10px;
+        flex: 1;
+        padding: 10px; /* Daha az padding */
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* iOS'ta daha pürüzsüz kaydırma */
     }
 
     .message {
         max-width: 95%;
-        font-size: 0.9em;
-        padding: 8px 12px;
+        font-size: 0.85em; /* Font boyutunu küçült */
+        padding: 7px 10px; /* Daha az padding */
+        margin-bottom: 8px;
     }
 
     .message-input-area {
-        padding: 10px;
-        flex-direction: row; /* Mobil cihazlarda yan yana kalsın */
+        padding: 10px; /* Daha az padding */
+        flex-direction: row;
         position: sticky;
         bottom: 0;
         z-index: 10;
+        box-sizing: border-box;
     }
 
     .message-input-area input {
-        padding: 10px 12px;
-        margin-right: 8px;
-        font-size: 0.9em;
+        padding: 8px 10px; /* Daha az padding */
+        margin-right: 5px; /* Daha az margin */
+        font-size: 0.9em; /* Font boyutunu küçült */
     }
 
     .message-input-area button {
-        padding: 10px 18px;
-        font-size: 0.9em;
+        padding: 8px 15px; /* Daha az padding */
+        font-size: 0.9em; /* Font boyutunu küçült */
     }
 
     .admin-panel {
@@ -477,61 +533,62 @@ body {
     }
 
     .footer {
-        position: relative;
-        padding: 10px;
-        font-size: 0.75em;
+        position: relative; /* Fixed yerine relative/static daha iyi olabilir */
+        padding: 8px;
+        font-size: 0.7em; /* Daha da küçük font */
     }
 }
 
 @media (max-width: 480px) {
+    html {
+        font-size: 12px; /* Telefon boyutlarında genel font boyutunu daha da küçült */
+    }
+    
     .auth-box {
-        padding: 20px 10px;
+        padding: 15px;
     }
 
     .auth-box h2 {
-        font-size: 1.5em;
+        font-size: 1.4em;
     }
 
     .auth-box input, .auth-box button {
-        font-size: 0.9em;
+        font-size: 0.85em;
         padding: 10px;
     }
 
     .top-nav {
-        padding: 8px 10px;
-    }
-
-    .top-nav span {
-        font-size: 0.9em;
+        padding: 6px 8px;
+        font-size: 0.8em;
     }
 
     .top-nav button {
-        padding: 6px 10px;
-        font-size: 0.8em;
+        padding: 5px 8px;
+        font-size: 0.75em;
     }
 
     .sidebar {
-        max-height: 120px;
-        padding: 8px;
+        max-height: 90px; /* Daha da küçük kullanıcı listesi */
+        padding: 5px;
     }
 
     .user-list li {
-        padding: 6px;
-        font-size: 0.85em;
+        padding: 5px;
+        font-size: 0.75em;
     }
 
     .chat-header {
-        padding: 8px 10px;
-        font-size: 1em;
+        padding: 6px 8px;
+        font-size: 0.9em;
     }
 
     .messages {
-        padding: 8px;
+        padding: 6px;
     }
 
     .message {
-        padding: 6px 10px;
-        font-size: 0.8em;
+        padding: 5px 8px;
+        font-size: 0.75em;
     }
 
     .message-input-area {
@@ -539,25 +596,30 @@ body {
     }
 
     .message-input-area input {
-        padding: 8px 10px;
-        font-size: 0.85em;
+        padding: 6px 8px;
+        font-size: 0.8em;
     }
 
     .message-input-area button {
-        padding: 8px 15px;
-        font-size: 0.85em;
+        padding: 6px 12px;
+        font-size: 0.8em;
     }
 
     .admin-panel h2 {
-        font-size: 1.5em;
+        font-size: 1.3em;
     }
 
     .admin-panel button {
-        padding: 8px 15px;
-        font-size: 0.9em;
+        padding: 6px 12px;
+        font-size: 0.85em;
     }
 
     .admin-log-entry {
-        font-size: 0.8em;
+        font-size: 0.75em;
+    }
+
+    .footer {
+        padding: 6px;
+        font-size: 0.65em;
     }
 }
