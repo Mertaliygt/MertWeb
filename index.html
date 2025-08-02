@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Özel Mesajlaşma Platformu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="auth-container">
+        <div class="auth-box">
+            <h2>Giriş Yap</h2>
+            <form id="loginForm">
+                <input type="email" id="email" placeholder="E-posta" required>
+                <input type="password" id="password" placeholder="Şifre" required>
+                <button type="submit">Giriş</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="app-container" style="display: none;">
+        
+        <nav class="top-nav">
+            <span id="loggedInUserName"></span>
+            <div>
+                <button id="logoutButton">Çıkış Yap</button>
+                <button id="adminPanelButton" style="display: none;">Admin Paneli</button>
+            </div>
+        </nav>
+
+        <div class="chat-container">
+            
+            <div class="sidebar">
+                <div class="user-list">
+                    <h3>Kullanıcılar</h3>
+                    <ul id="userList">
+                        
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="chat-area">
+                
+                <header class="chat-header">
+                    <h2 id="chatRecipientName">Sohbet (Kişi Seçin)</h2>
+                </header>
+                
+                <div class="messages" id="messagesDisplay">
+                    
+                </div>
+                
+                <div class="message-input-area">
+                    <input type="text" id="messageInput" placeholder="Mesaj yazın...">
+                    <button id="sendButton">Gönder</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Paneli - BURADAKİ DEĞİŞİKLİKLER -->
+        <div id="adminPanel" class="admin-panel" style="display: none;">
+            <h2>Admin Paneli - Tüm Mesajlar</h2>
+            <button id="refreshLogsButton">Logları Yenile</button> <!-- ID EKLENDİ -->
+            <button id="backToChatButton">Sohbete Geri Dön</button>
+            <div id="adminLogsDisplay" class="admin-messages-display"> <!-- ID EKLENDİ -->
+                
+            </div>
+        </div>
+
+    </div>
+    
+    <footer class="footer">
+        Gizlilik Esastır.
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script> 
+    <script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,647 @@
+/* Genel Stil Ayarları - Değişiklik Yok */
+:root {
+    --primary-bg-color: #0d0c1d; /* Derin Gece Mavisi/Mor */
+    --secondary-bg-color: #1a193a; /* Bir tık açık tonu */
+    --accent-color: #00ff00; /* Matrix yeşili */
+    --text-color: #e0e0e0; /* Açık metin rengi */
+    --border-color: #2a2a4e; /* Daha koyu border */
+    --input-bg-color: #07071c; /* Input arka plan rengi */
+    --placeholder-color: #7e8a97; /* Placeholder rengi */
+    --shadow-color: rgba(0, 255, 0, 0.2); /* Yeşilimsi gölge */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    --hover-bg-color: #00aa00; /* Yeşil hover */
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    background-color: var(--primary-bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: auto;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+/* Giriş Ekranı - Değişiklik Yok */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.auth-box {
+    background-color: var(--secondary-bg-color);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    border: 1px solid var(--border-color);
+}
+
+.auth-box h2 {
+    color: var(--accent-color);
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.auth-box input {
+    width: calc(100% - 20px);
+    padding: 15px 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    font-size: 1.1em;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-box input::placeholder {
+    color: var(--placeholder-color);
+}
+
+.auth-box input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.3);
+}
+
+.auth-box button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--accent-color);
+    color: var(--primary-bg-color);
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.auth-box button:hover {
+    background-color: var(--hover-bg-color);
+    transform: translateY(-2px);
+}
+
+/* Ana Uygulama Alanı - Değişiklik Yok */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    height: 90vh;
+    min-height: 500px;
+    background-color: var(--secondary-bg-color);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+/* Üst Navigasyon - Değişiklik Yok */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 25px;
+    background-color: var(--primary-bg-color);
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-weight: bold;
+    flex-wrap: wrap;
+}
+
+.top-nav button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--accent-color);
+    color: var(--primary-bg-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+
+.top-nav button:hover {
+    background-color: var(--hover-bg-color);
+}
+
+/* Sohbet Kapsayıcısı - Değişiklik Yok */
+.chat-container {
+    display: flex;
+    flex: 1;
+}
+
+/* Sol Panel (Kullanıcı Listesi) - DEĞİŞİKLİKLER BURADA */
+.sidebar {
+    width: 280px;
+    background-color: var(--primary-bg-color);
+    border-right: 1px solid var(--border-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.sidebar h3 {
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+.user-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.user-list li {
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    background-color: var(--input-bg-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    font-size: 1.2em; /* Masaüstü görünümünde kullanıcı ismi font boyutu büyütüldü */
+}
+
+.user-list li:hover {
+    background-color: #2a3b5b;
+    transform: translateX(5px);
+}
+
+.user-list li.active-user {
+    background-color: var(--accent-color);
+    color: var(--primary-bg-color);
+    font-weight: bold;
+}
+
+/* Sohbet Alanı - Değişiklik Yok */
+.chat-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--secondary-bg-color);
+    box-sizing: border-box;
+}
+
+/* Sohbet Başlığı - CHAT HEADER KISMINDAKİ DEĞİŞİKLİK */
+.chat-header {
+    background-color: var(--primary-bg-color);
+    padding: 8px 15px; /* Padding daha da azaltıldı, çerçeve daha da ince */
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 0.9em; /* Font boyutu daha da küçültüldü */
+    font-weight: bold;
+    text-align: center; /* Ortalanmış olsun */
+}
+
+.messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.message {
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.message p {
+    margin: 0;
+}
+
+.message.incoming {
+    background-color: #2a3b5b;
+    align-self: flex-start;
+    border-bottom-left-radius: 5px;
+}
+
+.message.outgoing {
+    background-color: var(--accent-color);
+    color: var(--primary-bg-color);
+    align-self: flex-end;
+    border-bottom-right-radius: 5px;
+}
+
+.message-input-area {
+    display: flex;
+    padding: 20px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--primary-bg-color);
+    box-sizing: border-box;
+}
+
+.message-input-area input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    background-color: var(--input-bg-color);
+    color: var(--text-color);
+    font-size: 1.1em;
+    outline: none;
+    margin-right: 10px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.message-input-area input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(0, 255, 0, 0.3);
+}
+
+.message-input-area button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background-color: var(--accent-color);
+    color: var(--primary-bg-color);
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.message-input-area button:hover {
+    background-color: var(--hover-bg-color);
+    transform: translateY(-1px);
+}
+
+/* Admin Paneli - Değişiklik Yok */
+.admin-panel {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 20px;
+    background-color: var(--secondary-bg-color);
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+.admin-panel h2 {
+    color: var(--accent-color);
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+}
+
+.admin-panel button {
+    align-self: flex-start;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--accent-color);
+    color: var(--primary-bg-color);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.admin-panel button:hover {
+    background-color: var(--hover-bg-color);
+}
+
+.admin-messages-display {
+    background-color: var(--primary-bg-color);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    flex: 1;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.admin-log-entry {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--border-color);
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.admin-log-entry:last-child {
+    border-bottom: none;
+}
+
+/* Footer - Değişiklik Yok */
+.footer {
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    background-color: var(--primary-bg-color);
+    color: var(--placeholder-color);
+    font-size: 0.8em;
+    border-top: 1px solid var(--border-color);
+    box-sizing: border-box;
+    position: relative;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+}
+
+/* Mobil Uyumluluk (Responsive Design) */
+@media (max-width: 768px) {
+    html {
+        font-size: 15px;
+    }
+
+    body {
+        padding: 0;
+        min-height: 100vh;
+        align-items: stretch;
+        overflow-x: hidden;
+    }
+
+    .auth-container {
+        padding: 10px;
+    }
+
+    .auth-box {
+        padding: 20px;
+        margin: 0 5px;
+        max-width: 350px;
+    }
+
+    .auth-box h2 {
+        font-size: 1.5em;
+    }
+
+    .auth-box input {
+        padding: 10px;
+        font-size: 1.1em;
+    }
+
+    .auth-box button {
+        padding: 10px;
+        font-size: 1em;
+    }
+
+    .app-container {
+        flex-direction: column;
+        height: 100vh;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 0;
+        margin: 0;
+        box-shadow: none;
+        overflow: hidden;
+    }
+
+    .top-nav {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 8px 10px;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        height: auto;
+        font-size: 0.9em;
+    }
+
+    .top-nav span {
+        margin-bottom: 0;
+        flex-grow: 1;
+        text-align: left;
+        padding-right: 5px;
+    }
+
+    .top-nav button {
+        margin-left: 5px;
+        margin-top: 0;
+        flex-shrink: 0;
+        padding: 6px 10px;
+        font-size: 0.8em;
+    }
+
+    .chat-container {
+        flex-direction: column;
+        flex: 1;
+        min-height: 0;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        max-height: 100px;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 8px;
+        order: 1;
+        box-sizing: border-box;
+    }
+
+    .sidebar h3 {
+        text-align: center;
+        margin-bottom: 8px;
+        font-size: 0.9em;
+    }
+
+    .user-list {
+        display: flex;
+        flex-wrap: nowrap; /* Kullanıcı isimleri tek satırda kalacak */
+        overflow-x: auto; /* Yatay kaydırma çubuğu */
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 5px;
+        justify-content: center; /* Ortalanmış olsunlar */
+    }
+
+    /* MOBİL GÖRÜNÜMDE KULLANICI İSMİ FONT BOYUTU VE MARGIN */
+    .user-list li {
+        flex-shrink: 0;
+        padding: 6px 12px; /* Yatayda biraz daha padding */
+        font-size: 1.1em; /* Font boyutu daha da büyütüldü */
+        margin: 0 6px 0 0; /* Sadece sağa boşluk artırıldı */
+        white-space: nowrap;
+    }
+
+    .chat-area {
+        flex: 1;
+        order: 2;
+        min-height: 0;
+    }
+
+    /* MOBİL GÖRÜNÜMDE CHAT HEADER - BURADAKİ DEĞİŞİKLİKLER */
+    .chat-header {
+        padding: 6px 10px; /* Padding daha da azaltıldı */
+        text-align: center;
+        font-size: 0.8em; /* Font boyutu daha da küçültüldü */
+    }
+
+    .messages {
+        flex: 1;
+        padding: 10px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .message {
+        max-width: 95%;
+        font-size: 0.85em;
+        padding: 7px 10px;
+        margin-bottom: 8px;
+    }
+
+    .message-input-area {
+        padding: 10px;
+        flex-direction: row;
+        position: sticky;
+        bottom: 0;
+        z-index: 10;
+        box-sizing: border-box;
+    }
+
+    .message-input-area input {
+        padding: 8px 10px;
+        margin-right: 5px;
+        font-size: 1.1em;
+    }
+
+    .message-input-area button {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .admin-panel {
+        padding: 15px;
+        flex: 1;
+    }
+
+    .admin-panel button {
+        width: auto;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .footer {
+        position: relative;
+        padding: 8px;
+        font-size: 0.7em;
+    }
+}
+
+@media (max-width: 480px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .auth-box {
+        padding: 10px;
+        margin: 0 5px;
+    }
+
+    .auth-box h2 {
+        font-size: 1.3em;
+    }
+
+    .auth-box input, .auth-box button {
+        font-size: 1.05em;
+        padding: 8px;
+    }
+
+    .top-nav {
+        padding: 5px 8px;
+        font-size: 0.75em;
+    }
+
+    .top-nav button {
+        padding: 4px 6px;
+        font-size: 0.7em;
+    }
+
+    .sidebar {
+        max-height: 80px;
+        padding: 5px;
+    }
+
+    .sidebar h3 {
+        font-size: 0.8em;
+    }
+
+    /* ÇOK KÜÇÜK EKRANLAR İÇİN KULLANICI İSMİ FONT BOYUTU VE MARGIN */
+    .user-list li {
+        padding: 4px 10px; /* Yatayda biraz daha padding */
+        font-size: 1.0em; /* Daha da büyütüldü */
+        margin: 0 5px 0 0; /* Sadece sağa boşluk */
+    }
+
+    /* ÇOK KÜÇÜK EKRANLAR İÇİN CHAT HEADER - BURADAKİ DEĞİŞİKLİKLER */
+    .chat-header {
+        padding: 4px 8px; /* Padding daha da azaltıldı */
+        font-size: 0.75em; /* Font boyutu daha da küçültüldü */
+    }
+
+    .messages {
+        padding: 5px;
+    }
+
+    .message {
+        padding: 4px 8px;
+        font-size: 0.8em;
+    }
+
+    .message-input-area {
+        padding: 8px;
+    }
+
+    .message-input-area input {
+        padding: 6px 8px;
+        font-size: 1.05em;
+    }
+
+    .message-input-area button {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+
+    .admin-panel h2 {
+        font-size: 1.2em;
+    }
+
+    .admin-panel button {
+        padding: 6px 12px;
+        font-size: 0.8em;
+    }
+
+    .admin-log-entry {
+        font-size: 0.7em;
+    }
+
+    .footer {
+        padding: 5px;
+        font-size: 0.6em;
+    }
+}
