@@ -1,15 +1,15 @@
 /* Genel Stil Ayarları - Değişiklik Yok */
 :root {
-    --primary-bg-color: #0d0c1d; /* Derin Gece Mavisi/Mor */
-    --secondary-bg-color: #1a193a; /* Bir tık açık tonu */
-    --accent-color: #00ff00; /* Matrix yeşili */
-    --text-color: #e0e0e0; /* Açık metin rengi */
-    --border-color: #2a2a4e; /* Daha koyu border */
-    --input-bg-color: #07071c; /* Input arka plan rengi */
-    --placeholder-color: #7e8a97; /* Placeholder rengi */
-    --shadow-color: rgba(0, 255, 0, 0.2); /* Yeşilimsi gölge */
+    --primary-bg-color: #000000; /* Tamamen Siyah */
+    --secondary-bg-color: #111111; /* Biraz daha açık siyah tonu */
+    --accent-color: #cead1d; /* Matrix yeşili */
+    --text-color: #860c2b; /* Açık yeşil metin rengi */
+    --border-color: #333333; /* Gri tonu border */
+    --input-bg-color: #e72525; /* Input arka plan rengi */
+    --placeholder-color: #555555; /* Placeholder rengi */
+    --shadow-color: rgba(0, 255, 0, 0.3); /* Yeşilimsi gölge */
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
-    --hover-bg-color: #00aa00; /* Yeşil hover */
+    --hover-bg-color: #00cc00; /* Koyu yeşil hover */
 }
 
 html {
@@ -191,7 +191,7 @@ body {
 }
 
 .user-list li:hover {
-    background-color: #2a3b5b;
+    background-color: #222222; /* Daha koyu hover tonu */
     transform: translateX(5px);
 }
 
@@ -244,7 +244,8 @@ body {
 }
 
 .message.incoming {
-    background-color: #2a3b5b;
+    background-color: #222222;
+    color: var(--text-color);
     align-self: flex-start;
     border-bottom-left-radius: 5px;
 }
@@ -544,6 +545,10 @@ body {
         width: auto;
         text-align: center;
         margin-bottom: 15px;
+    }
+
+    .admin-log-entry {
+        font-size: 0.7em;
     }
 
     .footer {
